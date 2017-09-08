@@ -1,5 +1,7 @@
 # eth-json-rpc-filters
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/kumavis/eth-json-rpc-filters.svg)](https://greenkeeper.io/)
+
 [json-rpc-engine](https://github.com/kumavis/json-rpc-engine) middleware implementing ethereum filter methods.
 Backed by an [eth-block-tracker](https://github.com/MetaMask/eth-block-tracker) and web3 provider interface (`web3.currentProvider`).
 
