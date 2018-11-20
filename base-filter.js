@@ -1,4 +1,5 @@
 const SafeEventEmitter = require('safe-event-emitter')
+const deepEqual = require('fast-deep-equal')
 
 class BaseFilter extends SafeEventEmitter {
 
@@ -15,9 +16,16 @@ class BaseFilter extends SafeEventEmitter {
   }
 
   addResults (newResults) {
-    this.updates = this.updates.concat(newResults)
-    this.allResults = this.allResults.concat(newResults)
-    newResults.forEach(result => this.emit('update', result))
+    const newResultsFiltered = newResults.filter((newResult) => {
+      const emittedBefore = this.allResults.some((emiitedResult) => {
+        return deepEqual(emiitedResult, newResult)
+      })
+
+      return !emittedBefore
+    })
+    this.updates = this.updates.concat(newResultsFiltered)
+    this.allResults = this.allResults.concat(newResultsFiltered)
+    newResultsFiltered.forEach(result => this.emit('update', result))
   }
 
   addInitialResults (newResults) {
